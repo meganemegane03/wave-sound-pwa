@@ -1,0 +1,271 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #6b4a2f;
+  font-family: serif;
+}
+
+
+/* 横向き専用 */
+body {
+  touch-action: none;
+}
+
+
+/* アプリ全体 */
+#app {
+  width: 100vw;
+  height: 100vh;
+}
+
+
+/* 開始画面 */
+#startScreen {
+
+  position: fixed;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      rgba(80,50,30,0.35),
+      rgba(80,50,30,0.35)
+    ),
+    url("wood-bg.png");
+
+  background-size: cover;
+
+  z-index: 10;
+
+}
+
+
+.titleBox {
+
+  text-align: center;
+
+  color: #f5e7c8;
+
+  text-shadow:
+    2px 2px 4px #3b2518;
+
+}
+
+
+.titleBox h1 {
+
+  font-size: 48px;
+
+  letter-spacing: 8px;
+
+  margin-bottom: 25px;
+
+}
+
+
+.titleBox p {
+
+  font-size: 20px;
+
+  line-height: 1.8;
+
+  margin-bottom: 35px;
+
+}
+
+
+
+#startButton {
+
+  padding: 15px 60px;
+
+  font-size: 22px;
+
+  border-radius: 8px;
+
+  border: none;
+
+  background: #8b5a32;
+
+  color: #fff;
+
+  box-shadow:
+    inset 0 0 10px rgba(255,255,255,0.2),
+    0 5px 10px rgba(0,0,0,0.4);
+
+}
+
+
+/* メイン画面 */
+
+#mainScreen {
+
+  width:100%;
+  height:100%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
+
+  background:
+
+  linear-gradient(
+    rgba(90,60,40,0.25),
+    rgba(90,60,40,0.25)
+  ),
+
+  url("wood-bg.png");
+
+
+  background-size:cover;
+
+}
+
+
+/* 木箱 */
+
+#woodBox {
+
+  position:relative;
+
+  width:70vw;
+
+  max-width:900px;
+
+  aspect-ratio:16/9;
+
+  overflow:hidden;
+
+
+}
+
+
+
+/* 木箱画像 */
+
+#boxImage {
+
+  position:absolute;
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:contain;
+
+  z-index:2;
+
+}
+
+
+
+/* 小豆配置場所 */
+
+#beansArea {
+
+  position:absolute;
+
+  width:70%;
+
+  height:55%;
+
+  left:15%;
+
+  top:27%;
+
+  overflow:hidden;
+
+  z-index:1;
+
+}
+
+
+
+/* 小豆 */
+
+.bean {
+
+  position:absolute;
+
+  width:18px;
+
+  height:18px;
+
+  border-radius:50%;
+
+  background:#7b1f19;
+
+  box-shadow:
+
+  inset 2px 2px 3px rgba(255,255,255,0.3),
+
+  2px 3px 4px rgba(0,0,0,0.4);
+
+}
+
+
+
+/* メッセージ */
+
+#message {
+
+ margin-top:25px;
+
+ color:#fff2d0;
+
+ font-size:22px;
+
+ text-shadow:
+ 2px 2px 4px #3b2518;
+
+}
+
+
+/* 横向き以外 */
+
+@media screen and (orientation:portrait){
+
+ body::before{
+
+ content:"横向きで使用してください";
+
+ position:absolute;
+
+ width:100%;
+
+ height:100%;
+
+ display:flex;
+
+ justify-content:center;
+
+ align-items:center;
+
+ background:#3b2518;
+
+ color:white;
+
+ font-size:24px;
+
+ z-index:999;
+
+ }
+
+}
