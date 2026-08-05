@@ -361,10 +361,6 @@ updateVolume();
 await startSensor();
 
 
-
-await startSensor();
-
-
 waveSound.volume = 0;
 
 waveSound.pause();
