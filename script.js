@@ -223,7 +223,7 @@ console.log(currentTilt);
 
 movement =
 Math.abs(
-currentTilt
+currentTilt - lastTilt
 );
 
 
@@ -235,7 +235,7 @@ currentTilt;
 
 // 動きがある時だけ音
 
-if(movement < 5){
+if(movement < 0.3){
 
     targetVolume = 0;
 
