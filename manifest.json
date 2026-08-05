@@ -1,35 +1,54 @@
 {
   "name": "波の音",
+
   "short_name": "波の音",
+
 
   "description": "木箱と小豆で楽しむ癒やしの波音アプリ",
 
+
+  "lang": "ja",
+
+
   "start_url": "/wave-sound-pwa/",
+
 
   "scope": "/wave-sound-pwa/",
 
+
   "display": "fullscreen",
+
 
   "orientation": "landscape",
 
+
   "background_color": "#5b4636",
+
 
   "theme_color": "#5b4636",
 
-  "lang": "ja",
 
   "icons": [
 
     {
+
       "src": "/wave-sound-pwa/icon.png",
+
       "sizes": "192x192",
+
       "type": "image/png"
+
     },
 
+
     {
+
       "src": "/wave-sound-pwa/icon.png",
+
       "sizes": "512x512",
+
       "type": "image/png"
+
     }
 
   ]
