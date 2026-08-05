@@ -1,79 +1,149 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>波の音</title>
+<meta charset="UTF-8">
 
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+<meta name="viewport" 
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <meta name="theme-color" content="#5b4636">
+<title>波の音</title>
 
-  <link rel="apple-touch-icon" href="icon.png">
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet" href="style.css">
+
+
+<meta name="theme-color" content="#5b4636">
+
+
+<link rel="apple-touch-icon" href="icon.png">
+
+
 </head>
+
 
 <body>
 
-  <div id="app">
 
-    <div id="startScreen">
-      <div class="titleBox">
-        <h1>波の音</h1>
-        <p>木箱を傾けて<br>海の音を感じてください</p>
-
-        <button id="startButton">
-          開始
-        </button>
-      </div>
-    </div>
+<div id="app">
 
 
-    <main id="mainScreen">
+<!-- 起動画面 -->
 
-      <div id="woodBox">
-
-        <img 
-          id="boxImage"
-          src="wood-box.png"
-          alt="波の音 木箱">
-
-        <div id="beansArea"></div>
-
-      </div>
+<div id="startScreen">
 
 
-      <div id="message">
-        ゆっくり傾けてください
-      </div>
-
-    </main>
+<div class="titleBox">
 
 
-  </div>
+<h1>波の音</h1>
 
 
-  <audio 
-    id="waveSound"
-    src="wave.mp3"
-    loop>
-  </audio>
+<p>
+木箱を傾けて<br>
+海の音を感じてください
+</p>
+
+
+<button id="startButton">
+開始
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<!-- メイン画面 -->
+
+
+<main id="mainScreen">
+
+
+
+<div id="woodBox">
+
+
+<img 
+id="boxImage"
+src="wood-box.png"
+alt="波の音">
+
+
+<div id="beansArea"></div>
+
+
+
+</div>
+
+
+
+<div id="message">
+
+ゆっくり傾けてください
+
+</div>
+
+
+
+</main>
+
+
+
+</div>
+
+
+
+
+<audio 
+id="waveSound"
+src="sounds/wave.mp3"
+loop>
+</audio>
+
+
+
 
 
 <script src="script.js"></script>
 
 
+
+
 <script>
 
+
 if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>{
-    navigator.serviceWorker.register("service-worker.js");
-  });
+
+
+window.addEventListener(
+"load",
+()=>{
+
+
+navigator.serviceWorker.register(
+"service-worker.js"
+);
+
+
+});
+
+
 }
+
 
 </script>
 
 
+
+
 </body>
+
 </html>
