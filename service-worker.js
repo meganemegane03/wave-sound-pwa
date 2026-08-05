@@ -1,10 +1,10 @@
-// 波の音アプリ Ver.1.3
+// 波の音アプリ Ver.2.0
 // service-worker.js
 
 
 
 const CACHE_NAME =
-"wave-sound-v1.3";
+"wave-sound-v2.0";
 
 
 
