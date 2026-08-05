@@ -235,7 +235,7 @@ currentTilt;
 
 // 動きがある時だけ音
 
-if(movement < 0.3){
+if(movement < 2){
 
 
 targetVolume = 0;
@@ -248,7 +248,7 @@ targetVolume = 0;
 
 targetVolume =
 Math.min(
-movement / 10,
+movement / 8,
 1
 );
 
