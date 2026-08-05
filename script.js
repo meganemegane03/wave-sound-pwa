@@ -216,7 +216,7 @@ function handleTilt(event){
 
 currentTilt =
 event.gamma || 0;
-
+console.log(currentTilt);
 
 
 // 前回との差を見る
