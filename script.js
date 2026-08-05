@@ -237,21 +237,27 @@ currentTilt;
 
 if(movement < 2){
 
+    targetVolume = 0;
 
-targetVolume = 0;
-
+    waveSound.pause();
 
 }else{
 
+    targetVolume =
+    Math.min(
+        movement / 8,
+        1
+    );
 
-// 動きの大きさで音量
 
-targetVolume =
-Math.min(
-movement / 8,
-1
-);
+    if(waveSound.paused){
 
+        waveSound.play()
+        .catch(e=>{
+            console.log("音声待機");
+        });
+
+    }
 
 }
 
@@ -355,7 +361,7 @@ createBeans();
 updateBeans();
 
 
-updateVolume();
+
 
 
 await startSensor();
