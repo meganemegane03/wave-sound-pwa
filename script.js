@@ -1,4 +1,4 @@
-// 波の音アプリ Ver.1.4
+// 波の音アプリ Ver.2.0
 // script.js
 
 
@@ -21,11 +21,21 @@ const BEAN_COUNT = 100;
 
 let beans = [];
 
-let tiltX = 0;
 
-let targetVolume = 0.4;
+// 現在の傾き
+let currentTilt = 0;
 
-let currentVolume = 0.4;
+// 前回の傾き
+let lastTilt = 0;
+
+// 傾き変化量
+let movement = 0;
+
+
+// 音量
+let targetVolume = 0;
+let currentVolume = 0;
+
 
 let started = false;
 
@@ -104,10 +114,12 @@ function updateBeans(){
 beans.forEach(bean=>{
 
 
-bean.speed += tiltX * 0.008;
+// 傾きの変化で動かす
+
+bean.speed += movement * 0.08;
 
 
-bean.speed *= 0.95;
+bean.speed *= 0.94;
 
 
 bean.x += bean.speed;
@@ -118,17 +130,16 @@ if(bean.x < 0){
 
 bean.x = 0;
 
-bean.speed *= -0.2;
+bean.speed *= -0.3;
 
 }
-
 
 
 if(bean.x > 90){
 
 bean.x = 90;
 
-bean.speed *= -0.2;
+bean.speed *= -0.3;
 
 }
 
@@ -140,6 +151,10 @@ bean.x + "%";
 
 });
 
+
+// 動きは徐々に消える
+
+movement *= 0.85;
 
 
 requestAnimationFrame(
@@ -155,6 +170,7 @@ updateBeans
 
 
 
+
 // --------------------
 // 音量調整
 // --------------------
@@ -162,15 +178,18 @@ updateBeans
 function updateVolume(){
 
 
-currentVolume +=
 
+currentVolume +=
 (targetVolume-currentVolume)
-*0.04;
+*0.08;
 
 
 
 waveSound.volume =
-currentVolume;
+Math.min(
+Math.max(currentVolume,0),
+1
+);
 
 
 
@@ -187,6 +206,7 @@ updateVolume
 
 
 
+
 // --------------------
 // 傾きセンサー
 // --------------------
@@ -194,33 +214,47 @@ updateVolume
 function handleTilt(event){
 
 
-
-tiltX =
+currentTilt =
 event.gamma || 0;
 
 
 
-const angle = Math.abs(tiltX);
+// 前回との差を見る
 
-if (angle < 5) {
+movement =
+Math.abs(
+currentTilt-lastTilt
+);
 
-    targetVolume = 0;
 
-} else if (angle < 10) {
 
-    targetVolume = 0.1;
+lastTilt =
+currentTilt;
 
-} else if (angle < 20) {
 
-    targetVolume = 0.3;
 
-} else if (angle < 30) {
+// 動きがある時だけ音
 
-    targetVolume = 0.6;
+if(movement < 0.3){
 
-} else {
 
-    targetVolume = 1.0;
+targetVolume = 0;
+
+
+}else{
+
+
+// 動きの大きさで音量
+
+targetVolume =
+Math.min(
+movement / 10,
+1
+);
+
+
+}
+
 
 }
 
@@ -232,7 +266,9 @@ if (angle < 5) {
 
 
 
-
+// --------------------
+// センサー開始
+// --------------------
 
 async function startSensor(){
 
@@ -247,7 +283,6 @@ typeof DeviceOrientationEvent.requestPermission === "function"
 
 
 const permission =
-
 await DeviceOrientationEvent.requestPermission();
 
 
@@ -280,7 +315,7 @@ handleTilt
 
 
 console.log(
-"センサー未許可"
+"センサーエラー"
 );
 
 
@@ -295,8 +330,9 @@ console.log(
 
 
 
+
 // --------------------
-// 開始
+// 開始ボタン
 // --------------------
 
 startButton.addEventListener(
@@ -310,31 +346,23 @@ if(started) return;
 started=true;
 
 
-
 startScreen.style.display="none";
-
 
 
 createBeans();
 
 
-
 updateBeans();
 
 
-
 updateVolume();
-
 
 
 await startSensor();
 
 
 
-
-waveSound.volume =
-currentVolume;
-
+waveSound.volume = 0;
 
 
 try{
