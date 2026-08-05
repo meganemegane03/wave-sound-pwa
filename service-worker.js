@@ -1,21 +1,35 @@
-const CACHE_NAME = "wave-sound-v1.2";
+// 波の音アプリ Ver.1.3
+// service-worker.js
 
 
-const BASE_PATH = "/wave-sound-pwa/";
+
+const CACHE_NAME =
+"wave-sound-v1.3";
+
+
+
+const BASE =
+"/wave-sound-pwa/";
+
 
 
 
 const CACHE_FILES = [
 
-BASE_PATH,
 
-BASE_PATH + "index.html",
+BASE,
 
-BASE_PATH + "style.css",
 
-BASE_PATH + "script.js",
+BASE + "index.html",
 
-BASE_PATH + "manifest.json"
+
+BASE + "style.css",
+
+
+BASE + "script.js",
+
+
+BASE + "manifest.json"
 
 
 ];
@@ -23,11 +37,15 @@ BASE_PATH + "manifest.json"
 
 
 
+
+
 // インストール
 
 self.addEventListener(
+
 "install",
-event=>{
+
+(event)=>{
 
 
 event.waitUntil(
@@ -49,10 +67,15 @@ CACHE_FILES
 );
 
 
+
 self.skipWaiting();
 
 
-});
+}
+
+);
+
+
 
 
 
@@ -62,14 +85,18 @@ self.skipWaiting();
 // 通常アクセス
 
 self.addEventListener(
+
 "fetch",
-event=>{
+
+(event)=>{
 
 
 event.respondWith(
 
 
-caches.match(event.request)
+caches.match(
+event.request
+)
 
 .then(response=>{
 
@@ -85,7 +112,10 @@ fetch(event.request);
 );
 
 
-});
+
+}
+
+);
 
 
 
@@ -93,11 +123,15 @@ fetch(event.request);
 
 
 
-// 更新時
+
+
+// 更新
 
 self.addEventListener(
+
 "activate",
-event=>{
+
+(event)=>{
 
 
 event.waitUntil(
@@ -109,6 +143,7 @@ caches.keys()
 
 
 return Promise.all(
+
 
 keys.map(key=>{
 
@@ -136,7 +171,10 @@ return caches.delete(key);
 );
 
 
+
 self.clients.claim();
 
 
-});
+}
+
+);
