@@ -1,19 +1,24 @@
-// 波の音アプリ Ver.1.0
-// service-worker.js
+const CACHE_NAME = "wave-sound-v1.1";
 
 
-const CACHE_NAME = "wave-sound-v1";
+const CACHE_FILES = [
 
+"./",
+"./index.html",
+"./style.css",
+"./script.js",
+"./manifest.json",
 
-const FILES_TO_CACHE = [
+"./icon.png",
 
-  "./",
-  "./index.html",
-  "./style.css",
-  "./script.js",
-  "./manifest.json"
+"./wood-box.png",
+"./wood-bg.png",
+
+"./sounds/wave.mp3"
 
 ];
+
+
 
 
 
@@ -21,48 +26,62 @@ const FILES_TO_CACHE = [
 
 self.addEventListener(
 "install",
-(event)=>{
+event=>{
 
-  event.waitUntil(
 
-    caches.open(CACHE_NAME)
-    .then(cache=>{
+event.waitUntil(
 
-      return cache.addAll(
-        FILES_TO_CACHE
-      );
 
-    })
+caches.open(CACHE_NAME)
 
-  );
+.then(cache=>{
+
+
+return cache.addAll(
+CACHE_FILES
+);
+
+
+})
+
+
+);
+
 
 });
 
 
 
 
-// 起動時キャッシュ利用
+
+
+// キャッシュ利用
 
 self.addEventListener(
 "fetch",
-(event)=>{
+event=>{
 
 
-  event.respondWith(
-
-    caches.match(event.request)
-    .then(response=>{
+event.respondWith(
 
 
-      return response || fetch(event.request);
+caches.match(event.request)
+
+.then(response=>{
 
 
-    })
+return response || fetch(event.request);
 
-  );
+
+})
+
+
+);
 
 
 });
+
+
 
 
 
@@ -71,37 +90,40 @@ self.addEventListener(
 
 self.addEventListener(
 "activate",
-(event)=>{
+event=>{
 
 
-  event.waitUntil(
-
-    caches.keys()
-    .then(keys=>{
+event.waitUntil(
 
 
-      return Promise.all(
+caches.keys()
 
-        keys.map(key=>{
-
-
-          if(
-            key !== CACHE_NAME
-          ){
-
-            return caches.delete(key);
-
-          }
+.then(keys=>{
 
 
-        })
-
-      );
+return Promise.all(
 
 
-    })
+keys.map(key=>{
 
-  );
+
+if(key !== CACHE_NAME){
+
+return caches.delete(key);
+
+}
+
+
+})
+
+
+);
+
+
+})
+
+
+);
 
 
 });
