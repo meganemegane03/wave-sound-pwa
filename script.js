@@ -1,4 +1,4 @@
-// 波の音アプリ Ver.1.1
+// 波の音アプリ Ver.1.3
 // script.js
 
 
@@ -28,6 +28,13 @@ let beans = [];
 let tiltX = 0;
 
 
+let targetVolume = 0.4;
+
+let currentVolume = 0.4;
+
+
+
+
 
 // --------------------
 // 小豆生成
@@ -49,18 +56,13 @@ bean.className = "bean";
 
 const data = {
 
-
 element: bean,
-
 
 x: Math.random() * 90,
 
-
 y: Math.random() * 75,
 
-
 speed: 0
-
 
 };
 
@@ -85,7 +87,6 @@ beans.push(data);
 }
 
 
-
 }
 
 
@@ -93,7 +94,7 @@ beans.push(data);
 
 
 // --------------------
-// 小豆の物理移動
+// 小豆物理
 // --------------------
 
 function updateBeans(){
@@ -102,26 +103,16 @@ function updateBeans(){
 beans.forEach(bean=>{
 
 
-// 傾きによる力
-
 bean.speed += tiltX * 0.012;
 
 
-
-// 摩擦
-
 bean.speed *= 0.94;
 
-
-
-// 移動
 
 bean.x += bean.speed;
 
 
 
-
-// 左右端
 
 if(bean.x < 0){
 
@@ -164,9 +155,8 @@ updateBeans
 
 
 
-
 // --------------------
-// 傾きセンサー
+// センサー
 // --------------------
 
 function startSensor(){
@@ -182,15 +172,15 @@ typeof DeviceOrientationEvent.requestPermission === "function"
 DeviceOrientationEvent
 .requestPermission()
 
-.then(result=>{
+.then(permission=>{
 
 
-if(result === "granted"){
+if(permission === "granted"){
 
 
 window.addEventListener(
 "deviceorientation",
-handleOrientation
+handleTilt
 );
 
 
@@ -207,7 +197,7 @@ else{
 
 window.addEventListener(
 "deviceorientation",
-handleOrientation
+handleTilt
 );
 
 
@@ -221,20 +211,16 @@ handleOrientation
 
 
 
+function handleTilt(event){
 
 
-function handleOrientation(event){
-
-
-
-// 横向き左右
 
 tiltX =
 event.gamma || 0;
 
 
 
-// 音量
+// 傾きの大きさ
 
 const power =
 
@@ -245,10 +231,44 @@ Math.abs(tiltX) / 45,
 
 
 
+// 波音量
+
+targetVolume =
+
+0.25 + (power * 0.75);
+
+
+
+}
+
+
+
+
+
+
+
+// --------------------
+// 音量なめらか変化
+// --------------------
+
+function updateVolume(){
+
+
+currentVolume +=
+
+(targetVolume - currentVolume)
+* 0.05;
+
+
+
 waveSound.volume =
+currentVolume;
 
-0.25 + power * 0.75;
 
+
+requestAnimationFrame(
+updateVolume
+);
 
 
 }
@@ -264,7 +284,9 @@ waveSound.volume =
 // --------------------
 
 startButton.addEventListener(
+
 "click",
+
 async()=>{
 
 
@@ -279,13 +301,15 @@ createBeans();
 updateBeans();
 
 
+updateVolume();
+
 
 startSensor();
 
 
 
 waveSound.volume =
-0.4;
+currentVolume;
 
 
 
@@ -293,7 +317,6 @@ try{
 
 
 await waveSound.play();
-
 
 
 }catch(e){
@@ -308,4 +331,6 @@ console.log(
 
 
 
-});
+}
+
+);
