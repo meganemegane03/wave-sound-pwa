@@ -1,4 +1,7 @@
-/* 波の音アプリ Ver.1.1 */
+/* 波の音アプリ Ver.1.2 */
+
+
+/* 基本設定 */
 
 * {
 
@@ -8,30 +11,46 @@ margin:0;
 
 padding:0;
 
+-webkit-user-select:none;
+
+user-select:none;
+
 }
+
 
 
 html,
 body {
 
+
 width:100%;
+
 height:100%;
+
 
 overflow:hidden;
 
+
 background:#5b4636;
 
+
+touch-action:none;
+
+
 }
+
 
 
 
 body {
 
-touch-action:none;
 
 font-family:
+
 "Yu Mincho",
+"Hiragino Mincho ProN",
 serif;
+
 
 }
 
@@ -39,14 +58,22 @@ serif;
 
 
 
-/* アプリ全体 */
+/* iPhone Safari対策 */
 
 #app {
 
+
 width:100vw;
-height:100vh;
+
+height:100dvh;
+
+
+overflow:hidden;
+
 
 }
+
+
 
 
 
@@ -60,13 +87,15 @@ height:100vh;
 
 position:fixed;
 
-width:100%;
-height:100%;
+
+inset:0;
 
 
 display:flex;
 
+
 justify-content:center;
+
 
 align-items:center;
 
@@ -74,15 +103,20 @@ align-items:center;
 
 background:
 
+
 linear-gradient(
-rgba(70,45,25,0.35),
-rgba(70,45,25,0.35)
+
+rgba(60,40,25,0.35),
+
+rgba(60,40,25,0.35)
+
 ),
+
 
 url("wood-bg.png");
 
-background-size:cover;
 
+background-size:cover;
 
 
 z-index:10;
@@ -96,18 +130,19 @@ z-index:10;
 
 
 
+
 .titleBox {
 
 
 text-align:center;
 
 
-color:#f5e7c8;
+color:#f6e5bd;
 
 
 text-shadow:
 
-2px 2px 5px #2b170c;
+2px 3px 5px #2b1608;
 
 
 }
@@ -119,9 +154,11 @@ text-shadow:
 .titleBox h1 {
 
 
-font-size:52px;
+font-size:clamp(36px,5vw,56px);
 
-letter-spacing:10px;
+
+letter-spacing:12px;
+
 
 margin-bottom:25px;
 
@@ -135,9 +172,11 @@ margin-bottom:25px;
 .titleBox p {
 
 
-font-size:20px;
+font-size:clamp(16px,2vw,22px);
+
 
 line-height:1.8;
+
 
 margin-bottom:35px;
 
@@ -148,12 +187,15 @@ margin-bottom:35px;
 
 
 
+
+
+
 #startButton {
 
 
 padding:
 
-15px 65px;
+15px 70px;
 
 
 font-size:24px;
@@ -162,10 +204,10 @@ font-size:24px;
 border:none;
 
 
-border-radius:10px;
+border-radius:12px;
 
 
-background:#85542e;
+background:#80512d;
 
 
 color:white;
@@ -174,10 +216,11 @@ color:white;
 
 box-shadow:
 
-inset 0 0 8px rgba(255,255,255,0.25),
 
-0 5px 10px rgba(0,0,0,0.5);
+inset 0 0 10px rgba(255,255,255,0.25),
 
+
+0 6px 12px rgba(0,0,0,0.45);
 
 
 }
@@ -196,6 +239,8 @@ inset 0 0 8px rgba(255,255,255,0.25),
 
 
 width:100%;
+
+
 height:100%;
 
 
@@ -239,6 +284,7 @@ background-size:cover;
 
 
 
+
 /* 木箱 */
 
 #woodBox {
@@ -247,14 +293,10 @@ background-size:cover;
 position:relative;
 
 
-width:75vw;
-
-
-max-width:1000px;
+width:min(78vw,1000px);
 
 
 aspect-ratio:16/9;
-
 
 
 }
@@ -264,7 +306,6 @@ aspect-ratio:16/9;
 
 
 
-/* 木箱画像 */
 
 #boxImage {
 
@@ -281,11 +322,11 @@ height:100%;
 object-fit:contain;
 
 
-
 z-index:3;
 
 
 }
+
 
 
 
@@ -308,20 +349,16 @@ left:16%;
 top:28%;
 
 
-
 width:68%;
 
 
 height:50%;
 
 
-
 overflow:hidden;
 
 
-
 z-index:2;
-
 
 
 }
@@ -333,7 +370,8 @@ z-index:2;
 
 
 
-/* 小豆画像対応 */
+
+/* 小豆 */
 
 .bean {
 
@@ -341,18 +379,15 @@ z-index:2;
 position:absolute;
 
 
+width:24px;
 
-width:22px;
 
-
-height:22px;
-
+height:24px;
 
 
 background-image:
 
 url("bean.png");
-
 
 
 background-size:contain;
@@ -361,13 +396,14 @@ background-size:contain;
 background-repeat:no-repeat;
 
 
+background-position:center;
+
 
 filter:
 
 drop-shadow(
-2px 3px 3px rgba(0,0,0,0.4)
+1px 2px 3px rgba(0,0,0,0.45)
 );
-
 
 
 }
@@ -385,7 +421,7 @@ drop-shadow(
 #message {
 
 
-margin-top:25px;
+margin-top:20px;
 
 
 font-size:22px;
@@ -394,10 +430,9 @@ font-size:22px;
 color:#fff0c8;
 
 
-
 text-shadow:
 
-2px 2px 4px #3a220f;
+2px 2px 5px #321b0b;
 
 
 }
@@ -410,12 +445,12 @@ text-shadow:
 
 
 
-/* 縦画面防止 */
+/* 縦持ち対策 */
 
 @media screen and (orientation:portrait){
 
 
-body::before{
+#app::before{
 
 
 content:
@@ -423,13 +458,10 @@ content:
 "横向きで使用してください";
 
 
-position:absolute;
+position:fixed;
 
 
-width:100%;
-
-
-height:100%;
+inset:0;
 
 
 display:flex;
@@ -439,7 +471,6 @@ justify-content:center;
 
 
 align-items:center;
-
 
 
 background:#3b2518;
@@ -454,9 +485,44 @@ font-size:24px;
 z-index:999;
 
 
+}
+
 
 }
 
+
+
+
+
+
+
+
+
+/* iPhoneセーフエリア */
+
+@supports(padding:max(0px)){
+
+
+#mainScreen{
+
+
+padding-left:
+
+max(
+0px,
+env(safe-area-inset-left)
+);
+
+
+padding-right:
+
+max(
+0px,
+env(safe-area-inset-right)
+);
+
+
+}
 
 
 }
