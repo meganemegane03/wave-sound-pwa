@@ -365,18 +365,9 @@ await startSensor();
 waveSound.volume = 0;
 
 
-try{
-
-
-await waveSound.play();
-
-
-}catch(e){
-
-
-console.log(
-"音声待機"
-);
+waveSound.pause();
+waveSound.currentTime = 0;
+waveSound.volume = 0;
 
 
 }
