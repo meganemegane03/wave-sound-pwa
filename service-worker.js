@@ -1,23 +1,24 @@
-const CACHE_NAME = "wave-sound-v1.1";
+const CACHE_NAME = "wave-sound-v1.2";
+
+
+const BASE_PATH = "/wave-sound-pwa/";
+
 
 
 const CACHE_FILES = [
 
-"./",
-"./index.html",
-"./style.css",
-"./script.js",
-"./manifest.json",
+BASE_PATH,
 
-"./icon.png",
+BASE_PATH + "index.html",
 
-"./wood-box.png",
-"./wood-bg.png",
+BASE_PATH + "style.css",
 
-"./sounds/wave.mp3"
+BASE_PATH + "script.js",
+
+BASE_PATH + "manifest.json"
+
 
 ];
-
 
 
 
@@ -48,6 +49,9 @@ CACHE_FILES
 );
 
 
+self.skipWaiting();
+
+
 });
 
 
@@ -55,7 +59,7 @@ CACHE_FILES
 
 
 
-// キャッシュ利用
+// 通常アクセス
 
 self.addEventListener(
 "fetch",
@@ -70,7 +74,9 @@ caches.match(event.request)
 .then(response=>{
 
 
-return response || fetch(event.request);
+return response ||
+
+fetch(event.request);
 
 
 })
@@ -86,7 +92,8 @@ return response || fetch(event.request);
 
 
 
-// 古いキャッシュ削除
+
+// 更新時
 
 self.addEventListener(
 "activate",
@@ -103,13 +110,16 @@ caches.keys()
 
 return Promise.all(
 
-
 keys.map(key=>{
 
 
-if(key !== CACHE_NAME){
+if(
+key !== CACHE_NAME
+){
+
 
 return caches.delete(key);
+
 
 }
 
@@ -124,6 +134,9 @@ return caches.delete(key);
 
 
 );
+
+
+self.clients.claim();
 
 
 });
