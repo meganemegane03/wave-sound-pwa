@@ -362,15 +362,14 @@ await startSensor();
 
 
 
-waveSound.volume = 0;
+await startSensor();
 
+
+waveSound.volume = 0;
 
 waveSound.pause();
 waveSound.currentTime = 0;
-waveSound.volume = 0;
 
 
 }
-
-
-});
+);
