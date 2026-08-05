@@ -200,23 +200,33 @@ event.gamma || 0;
 
 
 
-const power =
+const angle = Math.abs(tiltX);
 
-Math.min(
-Math.abs(tiltX)/45,
-1
-);
+if (angle < 5) {
 
+    targetVolume = 0;
 
+} else if (angle < 10) {
 
-targetVolume =
+    targetVolume = 0.1;
 
-0.25 +
-(power*0.75);
+} else if (angle < 20) {
 
+    targetVolume = 0.3;
 
+} else if (angle < 30) {
+
+    targetVolume = 0.6;
+
+} else {
+
+    targetVolume = 1.0;
 
 }
+
+
+
+
 
 
 
