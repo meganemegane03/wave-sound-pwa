@@ -5,21 +5,24 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" 
+<meta name="viewport"
 content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 
 <title>波の音</title>
 
 
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="/wave-sound-pwa/manifest.json">
 
-<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="/wave-sound-pwa/style.css">
 
 
 <meta name="theme-color" content="#5b4636">
 
 
-<link rel="apple-touch-icon" href="icon.png">
+<link rel="apple-touch-icon"
+href="/wave-sound-pwa/icon.png">
 
 
 </head>
@@ -31,7 +34,6 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 <div id="app">
 
 
-<!-- 起動画面 -->
 
 <div id="startScreen">
 
@@ -61,8 +63,6 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 
 
-<!-- メイン画面 -->
-
 
 <main id="mainScreen">
 
@@ -71,10 +71,10 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 <div id="woodBox">
 
 
-<img 
+<img
 id="boxImage"
-src="wood-box.png"
-alt="波の音">
+src="/wave-sound-pwa/wood-box.png"
+alt="波の音 木箱">
 
 
 <div id="beansArea"></div>
@@ -102,9 +102,10 @@ alt="波の音">
 
 
 
-<audio 
+
+<audio
 id="waveSound"
-src="sounds/wave.mp3"
+src="/wave-sound-pwa/sounds/wave.mp3"
 loop>
 </audio>
 
@@ -112,8 +113,7 @@ loop>
 
 
 
-<script src="script.js"></script>
-
+<script src="/wave-sound-pwa/script.js"></script>
 
 
 
@@ -129,18 +129,21 @@ window.addEventListener(
 
 
 navigator.serviceWorker.register(
-"service-worker.js"
+
+"/wave-sound-pwa/service-worker.js"
+
 );
 
 
-});
+}
+
+);
 
 
 }
 
 
 </script>
-
 
 
 
