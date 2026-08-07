@@ -309,26 +309,21 @@ aspect-ratio:16/9;
 
 #boxImage {
 
+position:fixed;
 
-position:absolute;
+left:0;
 
+top:0;
 
-width:100%;
+width:100vw;
 
-
-height:100%;
-
+height:100vh;
 
 object-fit:contain;
 
-
-z-index:3;
-
+z-index:9999;
 
 }
-
-
-
 
 
 
