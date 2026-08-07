@@ -50,52 +50,41 @@ let started = false;
 
 function createBeans(){
 
+    if(beans.length > 0) return;
 
-if(beans.length > 0) return;
+    for(let i = 0; i < BEAN_COUNT; i++){
 
+        const bean =
+        document.createElement("img");
 
+        bean.className = "bean";
 
-for(let i = 0; i < BEAN_COUNT; i++){
+        bean.src =
+        "bean.PNG";
 
+        const data = {
 
-const bean =
-document.createElement("div");
+            element: bean,
 
+            x: Math.random() * 85,
 
-bean.className = "bean";
+            y: Math.random() * 75,
 
+            speed: 0
 
+        };
 
-const data = {
+        bean.style.left =
+        data.x + "%";
 
-element: bean,
+        bean.style.top =
+        data.y + "%";
 
-x: Math.random() * 85,
+        beansArea.appendChild(bean);
 
-y: Math.random() * 75,
+        beans.push(data);
 
-speed:0
-
-};
-
-
-
-bean.style.left =
-data.x + "%";
-
-
-bean.style.top =
-data.y + "%";
-
-
-beansArea.appendChild(bean);
-
-
-beans.push(data);
-
-
-}
-
+    }
 
 }
 
